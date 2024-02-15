@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 const Logo = () => {
   return (
-    <div className="flex">
-      Kbook
-    </div>
+    <Link to='/'>
+      <h1>Kbook</h1>
+    </Link>
   );
 };
 

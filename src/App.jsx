@@ -1,18 +1,21 @@
 import { useState } from "react";
-import Navbar from "./components/Navbar";
-import HeroComponent from "./components/HeroComponet";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
 import Router from "./routes";
+import {  ToastContainer , Slide } from 'react-toastify';
 
 function App() {
-  const [count, setCount] = useState(0);
+
 
   return (
     <>
       <Router />
-      {/* <HomePage/> */}
-      {/* <LoginPage /> */}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        rtl={false}
+        theme="colored"
+        transition={Slide}
+      />
     </>
   );
 }

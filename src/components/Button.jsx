@@ -1,8 +1,8 @@
 const Button = (props) => {
-    const { children , className = '' } = props
+    const { onClick ,children , className = '' } = props
     const defaultClass = 'btn btn-primary'
     return (
-        <button className={defaultClass+' '+className}>{children}</button>
+        <button className={defaultClass+' '+className} onClick={onClick}>{children}</button>
     )
 }
 
