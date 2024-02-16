@@ -1,8 +1,10 @@
+import BookContainer from "../components/BookContainer"
+
 const SearchPage = () => {
     return (
-        <>
-            Search Page
-        </>
+        <div>
+            <BookContainer/>
+        </div>
     )
 }
 

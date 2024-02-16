@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom";
-const Table = () => {
-    const navigate = useNavigate()
-    const redirectToList = (id) => {
-        navigate(`/profile/history/${id}`)
-    }
+
+const TableInTransaction = () => {
+
   return (
     <div className="mt-6 pb-8">
       <div className="overflow-x-auto mx-6 ">
@@ -22,7 +19,7 @@ const Table = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            <tr className="hover" onClick={()=>redirectToList(1)} >
+            <tr className="hover" >
               <td className="border border-gray-400 px-4 py-2">1</td>
               <td className="border border-gray-400 px-4 py-2">Cy Ganderton</td>
               <td className="border border-gray-400 px-4 py-2">Cy Ganderton</td>
@@ -65,4 +62,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default TableInTransaction;

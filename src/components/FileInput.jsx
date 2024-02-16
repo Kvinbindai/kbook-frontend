@@ -1,5 +1,5 @@
 const FileInput = (props) => {
-    const { disabled = false } = props
+    const { disabled = false  , hide } = props
   return (
     <label className="form-control w-96">
       <div className="label">

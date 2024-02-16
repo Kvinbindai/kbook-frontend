@@ -11,7 +11,7 @@ const HomePage = () => {
       <div className="text-center py-8 bg-gray-300 text-black font-bold">
         <Title>หนังสือแนะนำ</Title>
       </div>
-      <BookContainer />
+      <BookContainer title="หนังสือทั้งหมด" footer="ดูรายการเพิ่มเติม"></BookContainer>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
 
-const AddressPage = () => {
+const EditAddressPage = () => {
   const submitData = (e) => {
     e.preventDefault();
   };
@@ -46,7 +46,7 @@ const AddressPage = () => {
           <Input placeholder="Enter Contact Name....">Contact Name :</Input>
           <Input placeholder="Enter Contact Number....">Contact Number :</Input>
           <div className="flex justify-between mt-5">
-            <Button className="w-40 bg-green-500">Confirm</Button>
+            <Button className="w-40 bg-blue-500">Confirm</Button>
             <Link to="/cart">
               <Button className="w-40 bg-gray-500">Back</Button>
             </Link>
@@ -57,4 +57,4 @@ const AddressPage = () => {
   );
 };
 
-export default AddressPage;
+export default EditAddressPage;

@@ -15,7 +15,7 @@ const HeroComponent = (props) => {
       <div className="hero-content text-center text-neutral-content">
         <div className="max-w-md">
           <h1 className="mb-5 text-3xl font-bold text-white">ร้านหนังสือที่คุณไว้ใจ</h1>
-          <Button className="text-white bg-transparent border-gray-100 hover:bg-gray-500 hover:border-gray-500">หนังสือทั้งหมด</Button>
+          <Button className="text-white  bg-gray-500 hover:bg-gray-800 hover:border-gray-800">หนังสือทั้งหมด</Button>
         </div>
       </div>
     </div>

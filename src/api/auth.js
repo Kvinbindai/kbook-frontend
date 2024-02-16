@@ -4,5 +4,13 @@ const login = (body) => {
   return  axios.post('/auth/login',body)
 }
 
+const register = (body) => {
+    return axios.post('/auth/register',body)
+}
 
-export { login }
+const getMe = () => {
+  return axios.get('/auth/getMe')
+}
+
+
+export { login , register , getMe }

@@ -12,22 +12,23 @@ const Input = (props) => {
     required = false,
     disabled = false,
     extendedClass,
+    width='96'
   } = props;
   return (
     <label className="form-control">
-      <div className="label">
+      {children ? <div className="label">
         <span className="label-text text-2xl">{children}</span>
         {required && (
           <span className="label-text-alt text-xl text-red-500">*</span>
         )}
-      </div>
+      </div> : null}
       <input
         name={name}
         value={value}
         onChange={onChange}
         type={type}
         placeholder={placeholder}
-        className={`input input-bordered w-96` + " " + extendedClass}
+        className={`input input-bordered w-${width} ${extendedClass}`}
         disabled={disabled}
       />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
