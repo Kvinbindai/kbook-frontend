@@ -3,7 +3,7 @@ import BookContainer from "../components/BookContainer"
 const SearchPage = () => {
     return (
         <div>
-            <BookContainer/>
+            <BookContainer title="หนังสือทั้งหมด"/>
         </div>
     )
 }

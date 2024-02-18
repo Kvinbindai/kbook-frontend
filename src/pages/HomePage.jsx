@@ -1,10 +1,13 @@
-import Navbar from "../components/Navbar";
-import HeroComponent from "../components/HeroComponet";
+
+import HeroComponent from "../components/HeroComponent";
 import Title from "../components/Title";
 import BookContainer from "../components/BookContainer";
-import Footer from "../components/Footer";
+
+
 
 const HomePage = () => {
+
+
   return (
     <div>
       <HeroComponent />

@@ -2,9 +2,11 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import Select from "../components/Select";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddEditBookDetailPage = () => {
   const [isEdit,setIsEdit] = useState(false)
+  const navigate = useNavigate()
   const image =
     "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg";
   return (
@@ -19,7 +21,7 @@ const AddEditBookDetailPage = () => {
           <Button className="bg-green-500 text-white">
             ADD BOOK
           </Button>
-          <Button>CANCEL</Button>
+          <Button onClick={()=> navigate(-1)}>CANCEL</Button>
         </div>
       </div>
       <div className="flex justify-between">

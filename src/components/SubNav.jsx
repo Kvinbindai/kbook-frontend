@@ -1,13 +1,18 @@
-import Select from "./Select"
-import Button from "./Button"
-
+import Select from "./Select";
+import Button from "./Button";
+import useDashboard from "../hooks/use-dashboard";
+import { Link } from "react-router-dom";
 const SubNav = () => {
-    return (
-        <div className="flex justify-between p-8">
-                <Select placeholder="Status"/>
-                {/* <Button>Add Category</Button> */}
-        </div>
-    )
-}
+  const { navButton, currentPath } = useDashboard();
+  return (
+    <div className="flex justify-between p-8">
+      <Select placeholder="Status" />
 
-export default SubNav
+      <Button>
+        <Link to={`/dashboard/${currentPath}/add`}>Add {navButton}</Link>
+      </Button>
+    </div>
+  );
+};
+
+export default SubNav;

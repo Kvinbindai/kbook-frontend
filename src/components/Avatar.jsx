@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
+import SubMenu from "./SubMenu";
+import useAuth from "../hooks/use-auth";
 const Avatar = () => {
+  const { authUser } = useAuth()
   return (
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -10,31 +13,7 @@ const Avatar = () => {
         />
       </div>
     </div>
-      <ul
-        tabIndex={0}
-        className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-60"
-      >
-        <li>
-          <Link>
-            <h1 className="text-2xl">Edit Profile</h1>
-          </Link>
-        </li>
-        <li>
-          <a className="text-2xl">View Transactions</a>
-        </li>
-        <li>
-          <div
-            role="button"
-            onClick={() => {
-              logout();
-              navigate("/");
-            }}
-            className="text-2xl"
-          >
-            Logout
-          </div>
-        </li>
-      </ul>
+     <SubMenu/>
     </div>
   );
 };

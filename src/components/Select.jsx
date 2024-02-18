@@ -1,5 +1,5 @@
 const Select = (props) => {
-    const { name , value , children , placeholder ,errorMessage ,required ,disabled=false  } = props
+    const { name , value , children , placeholder ,errorMessage ,required ,disabled=false , extendedClass } = props
   return (
     <label className="form-control ">
       {children ? (
@@ -10,7 +10,7 @@ const Select = (props) => {
           )}
         </div>
       ) : null}
-      <select className="select select-bordered text-white" disabled={disabled}>
+      <select className={`select select-bordered text-white ${extendedClass}`} disabled={disabled}>
         <option disabled selected>
           {placeholder}
         </option>

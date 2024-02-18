@@ -7,7 +7,7 @@ const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
   const [authUser, setAuthUser] = useState({
-    email : 'kavin'
+   role : 'ADMIN'
   });
 
   const fetchUser =  async() => {

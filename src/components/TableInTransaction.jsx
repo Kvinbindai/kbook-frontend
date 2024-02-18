@@ -19,7 +19,7 @@ const TableInTransaction = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            <tr className="hover" >
+            <tr  >
               <td className="border border-gray-400 px-4 py-2">1</td>
               <td className="border border-gray-400 px-4 py-2">Cy Ganderton</td>
               <td className="border border-gray-400 px-4 py-2">Cy Ganderton</td>
@@ -28,7 +28,7 @@ const TableInTransaction = () => {
               </td>
               <td className="border border-gray-400 px-4 py-2">Blue</td>
             </tr>
-            <tr className="hover">
+            <tr>
               <td className="border border-gray-400 px-4 py-2">1</td>
               <td className="border border-gray-400 px-4 py-2">Cy Ganderton</td>
               <td className="border border-gray-400 px-4 py-2">Cy Ganderton</td>
@@ -37,7 +37,7 @@ const TableInTransaction = () => {
               </td>
               <td className="border border-gray-400 px-4 py-2">Blue</td>
             </tr>
-            <tr className="hover">
+            <tr>
               <td className="border border-gray-400 px-4 py-2">1</td>
               <td className="border border-gray-400 px-4 py-2">Cy Ganderton</td>
               <td className="border border-gray-400 px-4 py-2">Cy Ganderton</td>
@@ -46,7 +46,7 @@ const TableInTransaction = () => {
               </td>
               <td className="border border-gray-400 px-4 py-2">Blue</td>
             </tr>
-            <tr className="hover">
+            <tr >
               <td className="border border-gray-400 px-4 py-2">1</td>
               <td className="border border-gray-400 px-4 py-2">Cy Ganderton</td>
               <td className="border border-gray-400 px-4 py-2">Cy Ganderton</td>

@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import AdminNavbar from "../components/AdminNavbar";
 
 
 const WrapperNoFooter = () => {
   return (
     <>
-      <Navbar />
+      <AdminNavbar />
       <div className="pt-[72px]">
         <Outlet />
       </div>
