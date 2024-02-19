@@ -1,55 +1,107 @@
+import { useState } from "react";
 import Button from "../components/Button";
+import useCart from "../hooks/use-cart";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/use-auth";
+
 
 const BookDetailPage = () => {
+  const navigate = useNavigate()
+  const { bookId } = useParams();
+  const [bookData, setBookData] = useState(null);
+  const [currentAmount ,setCurrentAmount] = useState(1)
+  const { getOneBookToDetail , addBasketItemToCart } = useCart();
+  const { authUser} = useAuth()
+  const getData = async () => {
+    const result = await getOneBookToDetail(+bookId);
+    setBookData(result);
+  };
+
+  const addCount = () => {
+    setCurrentAmount(currentAmount+1)
+  }
+  const decreaseCount = () => {
+    if(currentAmount <= 1){
+      setCurrentAmount(1)
+    }else{
+      setCurrentAmount(currentAmount-1)
+    }
+  }
+
+  const addToCart = async (e) => {
+    try{
+      e.preventDefault()
+      const data = { basketId : authUser.basketId , bookId : bookData.id , amount : currentAmount }
+     await addBasketItemToCart(data)
+     toast.success('Add to Cart Success')
+     navigate('/books')
+    }catch(err){
+      console.log(err)
+      toast.error('Failed To Add In Cart')
+    }
+  }
+
+
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div className="py-12 px-24 flex flex-col gap-7 w-full bg-white text-black">
       <div className="flex justify-between items-center ">
         <div className="text-xl flex gap-10 items-center">
           <span>BOOK LEFT :</span>
-          <span className="p-2 bg-gray-500 rounded-lg w-10 h-10 flex justify-center items-center">
-            {" "}
-            1{" "}
+          <span className="p-2 bg-gray-500 text-white rounded-lg w-10 h-10 flex justify-center items-center">
+            {bookData?.amount}
           </span>
         </div>
         <div className="flex justify-between gap-10 mr-24">
-          <Button>ADD TO CART</Button>
-          <Button>BACK</Button>
+          <Button onClick={addToCart} >ADD TO CART</Button>
+          <Button onClick={()=>navigate('/book')}>BACK</Button>
         </div>
       </div>
       <div className="flex justify-between ">
         <div>
           <img
-            src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            src={
+              bookData?.bookImage ||
+              "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            }
             className="h-96 w-80"
           />
         </div>
         <div className="flex flex-col gap-5">
           <div className="text-xl flex flex-col gap-5">
             <div>Book Title (EN) :</div>
-            <div className="px-5">Good Vibe , Good Life</div>
+            <div className="px-5">{bookData?.enTitle || "-"}</div>
           </div>
           <div className="text-xl flex flex-col gap-5">
             <div>Book Title (TH) :</div>
-            <div className="px-5">เทสดี , เทสไลฟ์</div>
+            <div className="px-5">{bookData?.thTitle || "-"}</div>
           </div>
           <div className="text-xl flex flex-col gap-5">
             <div>Category :</div>
-            <div className="px-5">SELF-IMPROVEMENT</div>
+            <div className="px-5">
+              {bookData?.categoryEn || bookData?.categoryTh}
+            </div>
           </div>
           <div className="text-xl grid grid-cols-3 gap-10">
             <div>
               <div>Amount :</div>
               <div className="flex justify-between text-center items-center bg-gray-500 rounded-lg mt-5">
-                <span className="material-symbols-outlined">
+                <span className="material-symbols-outlined active:scale-110 cursor-pointer"  onClick={decreaseCount}>
                   do_not_disturb_on
                 </span>
-                1<span className="material-symbols-outlined">add_circle</span>
+                <span className="text-white" >{currentAmount}</span>
+                <span className="material-symbols-outlined active:scale-110 cursor-pointer" onClick={addCount}>add_circle</span>
               </div>
             </div>
             <div>
               <div>Price :</div>
-              <div className="text-center  bg-gray-500 rounded-lg mt-5">
-                255
+              <div className="text-center  rounded-lg mt-5">
+                {bookData?.price}
               </div>
             </div>
             <div className="flex items-end">
@@ -61,11 +113,11 @@ const BookDetailPage = () => {
       <div className="text-xl flex flex-col gap-5 ">
         <div className="flex flex-col gap-5">
           <div>Description (EN) :</div>
-          <div className="px-5">Good Vibe , Good Life</div>
+          <div className="px-5">{bookData?.enDescription || "-"}</div>
         </div>
         <div className="flex flex-col gap-5">
           <div>Description (TH) :</div>
-          <div className="px-5">Good Vibe , Good Life</div>
+          <div className="px-5">{bookData?.thDescription || "-"}</div>
         </div>
       </div>
     </div>

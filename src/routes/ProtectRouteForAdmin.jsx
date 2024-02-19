@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom"
 const ProtectRouteForAdmin = ({children}) => {
     const { authUser } = useAuth()
     return (
-        authUser.role === 'ADMIN' ? children : <Navigate to='*'/>
+        authUser?.role === 'ADMIN' ? children : <Navigate to='*'/>
     )
 }
 

@@ -1,5 +1,5 @@
 const FileInput = (props) => {
-    const { disabled = false  , hide } = props
+    const { disabled = false , onChange  } = props
   return (
     <label className="form-control w-96">
       <div className="label">
@@ -10,6 +10,7 @@ const FileInput = (props) => {
         type="file"
         className="file-input file-input-bordered w-96"
         placeholder="test"
+        onChange={onChange}
       />
     </label>
   );

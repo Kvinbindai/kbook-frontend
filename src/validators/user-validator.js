@@ -51,4 +51,15 @@ const registerSchema = Joi.object({
   ),
 });
 
-export { loginSchema, registerSchema };
+const updateSchema = Joi.object({
+  firstName : Joi.string().optional(),
+  lastName : Joi.string().optional(),
+  phoneNumber: Joi.string()
+  .pattern(/^[0-9]{10}$/)
+  .optional().messages({"string.pattern.base": "PhoneNumber must be a Number and 10 characters" }),
+  profileImage : Joi.string().optional()
+})
+
+
+
+export { loginSchema, registerSchema , updateSchema };

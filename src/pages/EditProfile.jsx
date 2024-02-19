@@ -3,31 +3,29 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import Title from "../components/Title";
 import FileInput from "../components/FileInput";
-import { useState } from "react";
+import { useState , useRef } from "react";
 import { toast } from "react-toastify";
-import { registerSchema } from "../validators/user-validator";
+import { registerSchema, updateSchema } from "../validators/user-validator";
 import validateInput from "../utils/validate";
 import useAuth from "../hooks/use-auth";
+import Loading from "../components/Loading";
+import { editUser } from "../api/user";
 const EditProfile = () => {
   const navigate = useNavigate();
-  const { registerUser, authUser } = useAuth();
+  const { authUser , updateUser } = useAuth();
   const [user, setUser] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    profileImage: "",
+    firstName: authUser?.firstName,
+    lastName: authUser?.lastName,
+    phoneNumber: authUser?.phoneNumber,
+    profileImage: authUser?.profileImage,
   });
+  const [image , setImage ] = useState(null)
   const [error, setError] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
     firstName: "",
     lastName: "",
     phoneNumber: "",
   });
+  const [loading , setLoading] = useState(false)
   const handleChangeInput = (e) => {
     setUser({
       ...user,
@@ -38,17 +36,30 @@ const EditProfile = () => {
   const submitForm = async (e) => {
     try {
       e.preventDefault();
-      const { value, errorObj } = validateInput(registerSchema, user);
-      setError(errorObj);
-      await registerUser(value);
+      const { value, errorObj } = validateInput(updateSchema, user);
+      // if(errorObj){
+      //   setError(errorObj);
+      //   throw Error 
+      // }
+      const formData = new FormData() 
+      formData.append('firstName' , user.firstName)
+      formData.append('lastName' , user.firstName)
+      formData.append('phoneNumber' , user.phoneNumber)
+      formData.append('profileImage' , image)
+      setLoading(true)
+      await updateUser(formData);
       navigate("/");
-      toast.success("Register Success");
+      toast.success("Update Success");
     } catch (err) {
       console.log(err);
-      toast.error("Register failed");
+      toast.error("Update failed");
+    } finally{
+      setLoading(false)
     }
   };
   return (
+    <>
+    {loading && <Loading/>}
     <div className="min-h-screen pt-5 bg-white">
       <Title className="text-center font-bold">EDIT PROFILE</Title>
       <form onSubmit={submitForm}>
@@ -80,7 +91,21 @@ const EditProfile = () => {
           >
             Phone Number :
           </Input>
-          <FileInput />
+          <FileInput onChange={(e)=>{
+            e.stopPropagation()
+            if(e.target.files[0]){
+              setImage(e.target.files[0])
+              setUser({
+                ...user,
+                profileImage : URL.createObjectURL(e.target.files[0])
+              })
+            }
+          }}/>
+          {
+            user.profileImage && <div className="w-96 h-96 flex flex-col justify-center items-center">
+              <img src={user.profileImage} className="w-96 h-96 rounded-full" />
+            </div>
+          }
           <div className="flex gap-8 my-8 justify-between">
             <Button className="bg-blue-500 w-44">Confirm</Button>
             <Button className="bg-gray-500 w-44">Reset</Button>
@@ -88,6 +113,7 @@ const EditProfile = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 

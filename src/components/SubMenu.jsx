@@ -1,5 +1,5 @@
 import useAuth from "../hooks/use-auth";
-import { useNavigate ,Link } from "react-router-dom";
+import { useNavigate , Link  } from "react-router-dom";
 const SubMenu = () => {
   const { authUser , logout } = useAuth();
   const navigate = useNavigate()
@@ -26,7 +26,7 @@ const SubMenu = () => {
       ) : (
         <>
           <li>
-            <Link to="/">
+            <Link to={`/profile/edit`}>
               <h1 className="text-2xl">Edit Profile</h1>
             </Link>
           </li>

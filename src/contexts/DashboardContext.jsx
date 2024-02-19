@@ -58,16 +58,16 @@ const DashboardContextProvider = ({ children }) => {
   const setButton = (path) => {
     switch (path) {
       case "books":
-        setNavButton("Book");
+        setNavButton("Add Book");
         break;
       case "category":
-        setNavButton("Category");
+        setNavButton("Add Category");
         break;
       case "transactions":
-        setNavButton("Transaction");
+        setNavButton("Edit Transaction");
         break;
       default:
-        setNavButton("Book");
+        setNavButton("Add Book");
     }
   };
 

@@ -10,7 +10,7 @@ const BookContainer = (props) => {
         <CardContainer />
       </div>
       {footer ? (
-        <Link to="/search">
+        <Link to="/books">
           <h1 className="text-right text-xl text-blue-500 underline underline-offset-8">
             {footer}
           </h1>

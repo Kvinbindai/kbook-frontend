@@ -52,11 +52,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/search",
+        path: "/books",
         element: <SearchPage />,
       },
       {
-        path: "/book/:bookId",
+        path: "/books/:bookId",
         element: <BookDetailPage />,
       },
       {
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/profile/:userId",
+        path: "/profile/edit",
         element: (
           <RouteForUserLogin>
             <EditProfile />

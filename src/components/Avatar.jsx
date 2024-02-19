@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import SubMenu from "./SubMenu";
 import useAuth from "../hooks/use-auth";
+import profile from '../assets/profile.png'
 const Avatar = () => {
   const { authUser } = useAuth()
   return (
@@ -9,7 +10,7 @@ const Avatar = () => {
       <div className="w-20 rounded-full">
         <img
           alt="Tailwind CSS Navbar component"
-          src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+          src={authUser.profileImage ? authUser.profileImage : profile }
         />
       </div>
     </div>

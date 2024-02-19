@@ -6,7 +6,7 @@ const Table = (props) => {
   const { data, header } = props;
   const navigate = useNavigate();
   const redirectToList = (id) => {
-    navigate(`/profile/history/${id}`);
+    navigate(`/books/${id}`);
   };
 
   return (

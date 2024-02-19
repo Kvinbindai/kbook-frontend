@@ -9,7 +9,7 @@ const SubNav = () => {
       <Select placeholder="Status" />
 
       <Button>
-        <Link to={`/dashboard/${currentPath}/add`}>Add {navButton}</Link>
+        <Link to={`/dashboard/${currentPath}/add`}>{navButton}</Link>
       </Button>
     </div>
   );

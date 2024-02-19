@@ -70,17 +70,17 @@ const subNavButton = [
     {
         id : 1,
         path : 'books',
-        title : "Book"
+        title : "Add Book"
     },
     {
         id : 2,
         path : 'category',
-        title : "Category"
+        title : "Add Category"
     },
     {
         id : 3,
         path : 'transactions',
-        title : "Transaction"
+        title : "Edit Transaction"
     },
 ]
 

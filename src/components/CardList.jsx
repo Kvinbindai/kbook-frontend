@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import Button from "./Button";
+import { useParams } from "react-router-dom";
 
 const CardList = () => {
+  const { bookId } = useParams()
   return (
-    <Link to="/book/:bookId">
+    <Link to={`/books/${bookId}`}>
       <div className="card min-w-64 bg-base-100 shadow-xl p-5 hover:scale-110">
         <figure>
           <img
