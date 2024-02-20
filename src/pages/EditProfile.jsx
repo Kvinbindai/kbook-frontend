@@ -108,7 +108,9 @@ const EditProfile = () => {
           }
           <div className="flex gap-8 my-8 justify-between">
             <Button className="bg-blue-500 w-44">Confirm</Button>
-            <Button className="bg-gray-500 w-44">Reset</Button>
+            <Button className="bg-gray-500 w-44" onClick={()=>{
+              navigate('/')
+            }}>Go Back</Button>
           </div>
         </div>
       </form>

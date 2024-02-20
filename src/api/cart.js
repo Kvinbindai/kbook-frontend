@@ -12,4 +12,9 @@ const getAllBasketItemFromBasketId = () => {
     return axios.get('/basketItem')
 }
 
-export { getBookDetailById , addBasketItem , getAllBasketItemFromBasketId}
+
+const updateAllAmountOnBasket = (basketId,array) => {
+    return axios.patch(`/basketItem/${basketId}`, array)
+}
+
+export { getBookDetailById , addBasketItem , getAllBasketItemFromBasketId , updateAllAmountOnBasket}

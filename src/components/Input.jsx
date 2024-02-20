@@ -12,7 +12,9 @@ const Input = (props) => {
     required = false,
     disabled = false,
     extendedClass,
-    width='96'
+    width='96',
+    style
+    
   } = props;
   return (
     <label className="form-control">
@@ -28,8 +30,9 @@ const Input = (props) => {
         onChange={onChange}
         type={type}
         placeholder={placeholder}
-        className={`input input-bordered w-${width} ${extendedClass}`}
+        className={`input input-bordered w-${width} text-white ${extendedClass}`}
         disabled={disabled}
+        style={style}
       />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </label>

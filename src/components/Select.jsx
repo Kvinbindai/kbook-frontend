@@ -1,5 +1,5 @@
 const Select = (props) => {
-    const { name , value , children , placeholder ,errorMessage ,required ,disabled=false , extendedClass } = props
+    const { name , value , children , placeholder ,errorMessage ,required ,disabled=false , extendedClass ,option , onChange } = props
   return (
     <label className="form-control ">
       {children ? (
@@ -10,17 +10,16 @@ const Select = (props) => {
           )}
         </div>
       ) : null}
-      <select className={`select select-bordered text-white ${extendedClass}`} disabled={disabled}>
+      <select className={`select select-bordered text-white ${extendedClass}`} disabled={disabled} onChange={onChange}>
         <option disabled selected>
           {placeholder}
         </option>
-        <option>Star Wars</option>
-        <option>Harry Potter</option>
-        <option>Lord of the Rings</option>
-        <option>Planet of the Apes</option>
-        <option>Star Trek</option>
+        {
+          option?.map((e)=>{
+            return <option key={e.id} value={e.name_th}>{e.name_th}</option>
+          })
+        }
       </select>
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </label>
   );
 };

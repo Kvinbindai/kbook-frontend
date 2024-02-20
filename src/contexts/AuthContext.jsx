@@ -14,13 +14,26 @@ export default function AuthContextProvider({ children }) {
       const res = await getMe();
       console.log(res);
       setAuthUser(res.data.user);
+      // for (let i = 0; i < authUser.allItem.length; i++) {
+      //   if (authUser.allItem[i].amount > 0) {
+      //     setTotalAmount((prev) => {
+      //       return prev + authUser.allItem[i].amount;
+      //     });
+      //     setTotalPrice((prev) => {
+      //       return prev + authUser.allItem[i].price * authUser.allItem[i].amount;
+      //     });
+      //   }
+      // }
     } catch (err) {
       console.log(err);
     }
   };
+  
 
   useEffect(() => {
     fetchUser();
+    // setAllState();
+   
   }, []);
 
   const loginUser = async (body) => {
@@ -47,8 +60,11 @@ export default function AuthContextProvider({ children }) {
     setAuthUser({
       ...res.data.updateUser,
     });
-    fetchUser()
+    // fetchUser()
   };
+
+  
+  
 
   return (
     <AuthContext.Provider
@@ -58,6 +74,7 @@ export default function AuthContextProvider({ children }) {
         registerUser,
         logout,
         updateUser,
+        fetchUser,
       }}
     >
       {children}

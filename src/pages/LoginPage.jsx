@@ -32,6 +32,7 @@ const LoginPage = () => {
     try {
       e.preventDefault();
       const {value , errorObj } = validateInput(loginSchema,user)
+      
       setError(errorObj)
      if(!value && errorObj){
       setError(errorObj)
@@ -43,7 +44,10 @@ const LoginPage = () => {
       navigate('/')
     } catch (err) {
       console.log(err);
-      toast.error(err.response?.data.message);
+      if(err.response){
+        toast.error(err.response?.data.message);
+      }
+      toast.error('Internal Server Error')
     }
   };
   return (

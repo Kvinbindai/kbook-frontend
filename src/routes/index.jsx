@@ -56,7 +56,7 @@ const router = createBrowserRouter([
         element: <SearchPage />,
       },
       {
-        path: "/books/:bookId",
+        path: "/book/:bookId",
         element: <BookDetailPage />,
       },
       {
