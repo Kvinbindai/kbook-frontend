@@ -6,7 +6,7 @@ const SubMenu = () => {
   return (
     <ul
       tabIndex={0}
-      className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-60"
+      className="mt-3 z-[1] p-2  text-secondary shadow menu menu-sm dropdown-content bg-primary rounded-box w-60"
     >
       {authUser?.role === "ADMIN" ? (
         <>
@@ -16,6 +16,7 @@ const SubMenu = () => {
               onClick={() => {
                 logout();
                 navigate("/login");
+ 
               }}
               className="text-2xl"
             >
@@ -31,7 +32,9 @@ const SubMenu = () => {
             </Link>
           </li>
           <li>
-            <a className="text-2xl">View Transactions</a>
+          <Link to={`/profile/history`}>
+            <h1 className="text-2xl">View Transactions</h1>
+            </Link>
           </li>
           <li>
             <div
@@ -39,6 +42,7 @@ const SubMenu = () => {
               onClick={() => {
                 logout();
                 navigate("/login");
+                window.location.reload()
               }}
               className="text-2xl"
             >

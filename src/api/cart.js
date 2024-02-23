@@ -16,5 +16,8 @@ const getAllBasketItemFromBasketId = () => {
 const updateAllAmountOnBasket = (basketId,array) => {
     return axios.patch(`/basketItem/${basketId}`, array)
 }
+const clearAllBasketItem = (basketId) => {
+    return axios.delete(`/basketItem/clear/${basketId}`)
+}
 
-export { getBookDetailById , addBasketItem , getAllBasketItemFromBasketId , updateAllAmountOnBasket}
+export { getBookDetailById , addBasketItem , getAllBasketItemFromBasketId , updateAllAmountOnBasket , clearAllBasketItem}

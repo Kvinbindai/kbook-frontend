@@ -1,21 +1,25 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
-import { getAllList } from "../api/dashboard";
+import {
+  getAllBookList,
+  getAllCategoryList,
+  getAllTransactionList,
+} from "../api/dashboard";
 import {
   booksHeader,
   categoryHeader,
   transactionsHeader,
 } from "../constant/table";
-import useAuth from "../hooks/use-auth";
+import { updateTransactionStatus} from '../api/transaction'
+import { createBook, updateBook } from "../api/book";
+import { editCategory, addCategory } from "../api/category";
 const DashboardContext = createContext();
 
 const DashboardContextProvider = ({ children }) => {
-
   const [currentPath, setCurrenPath] = useState("books");
   const [tableHeader, setTableHeader] = useState([]);
   const [navButton, setNavButton] = useState("");
-  const [data, setData] = useState([]);
   const navListForAdmin = [
     {
       id: 1,
@@ -34,9 +38,17 @@ const DashboardContextProvider = ({ children }) => {
     },
   ];
 
-  const getData = async (path) => {
-    const res = await getAllList(path);
-    setData(res.data.data);
+  const [categoryData, setCategoryData] = useState(null);
+  const [bookData, setBookData] = useState(null);
+  const [transactionData, setTransactionData] = useState(null);
+
+  const getData = async () => {
+    const book = await getAllBookList();
+    setBookData(book.data.data);
+    const category = await getAllCategoryList();
+    setCategoryData(category.data.data);
+    const transaction = await getAllTransactionList();
+    setTransactionData(transaction.data.data);
   };
 
   const setHeader = (path) => {
@@ -71,9 +83,7 @@ const DashboardContextProvider = ({ children }) => {
     }
   };
 
-
   useEffect(() => {
-    getData(currentPath);
     setHeader(currentPath);
     setButton(currentPath);
   }, [currentPath]);
@@ -82,16 +92,52 @@ const DashboardContextProvider = ({ children }) => {
     setCurrenPath(path);
   };
 
+  const createNewBook = async (formData) => {
+    const data = await createBook(formData);
+    // console.log(data.data.allList)
+    getData();
+  };
+
+  const updateOldBook = async (formData, bookId) => {
+    await updateBook(formData, bookId);
+    getData();
+  };
+
+
+  const addNewCategory = async (obj) => {
+    await addCategory(obj)
+    getData()
+  }
+
+  const editOldCategory = async(obj,categoryId) => {
+    await editCategory(obj,categoryId)
+    getData()
+  }
+
+  const editUserTransaction = async (transactionId,details) => {
+    await updateTransactionStatus(transactionId,details)
+    getData()
+  }
+
+
   return (
     <DashboardContext.Provider
       value={{
+        getData,
+        addNewCategory,
+        editOldCategory,
+        editUserTransaction,
+        createNewBook,
+        updateOldBook,
         currentPath,
         setCurrenPath,
         navListForAdmin,
         handleLink,
-        data,
         tableHeader,
-        navButton
+        navButton,
+        categoryData,
+        transactionData,
+        bookData,
       }}
     >
       {children}

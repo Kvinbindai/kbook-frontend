@@ -12,7 +12,7 @@ import Loading from "../components/Loading";
 import { editUser } from "../api/user";
 const EditProfile = () => {
   const navigate = useNavigate();
-  const { authUser , updateUser } = useAuth();
+  const { authUser , updateUser , setRefresh , refresh } = useAuth();
   const [user, setUser] = useState({
     firstName: authUser?.firstName,
     lastName: authUser?.lastName,
@@ -37,10 +37,7 @@ const EditProfile = () => {
     try {
       e.preventDefault();
       const { value, errorObj } = validateInput(updateSchema, user);
-      // if(errorObj){
-      //   setError(errorObj);
-      //   throw Error 
-      // }
+
       const formData = new FormData() 
       formData.append('firstName' , user.firstName)
       formData.append('lastName' , user.firstName)
@@ -48,6 +45,7 @@ const EditProfile = () => {
       formData.append('profileImage' , image)
       setLoading(true)
       await updateUser(formData);
+      setRefresh(!refresh)
       navigate("/");
       toast.success("Update Success");
     } catch (err) {
@@ -60,8 +58,8 @@ const EditProfile = () => {
   return (
     <>
     {loading && <Loading/>}
-    <div className="min-h-screen pt-5 bg-white">
-      <Title className="text-center font-bold">EDIT PROFILE</Title>
+    <div className="min-h-screen pt-5">
+      <Title className="text-center bg-transparent font-bold">EDIT PROFILE</Title>
       <form onSubmit={submitForm}>
         <div className="w-full flex flex-col items-center mt-20 gap-10">
           <Input
@@ -107,8 +105,8 @@ const EditProfile = () => {
             </div>
           }
           <div className="flex gap-8 my-8 justify-between">
-            <Button className="bg-blue-500 w-44">Confirm</Button>
-            <Button className="bg-gray-500 w-44" onClick={()=>{
+            <Button className="bg-primary text-secondary w-44">Confirm</Button>
+            <Button className="bg-secondary w-44" onClick={()=>{
               navigate('/')
             }}>Go Back</Button>
           </div>

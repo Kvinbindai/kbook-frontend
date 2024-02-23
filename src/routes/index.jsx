@@ -4,24 +4,30 @@ import Wrapper from "../layouts/Wrapper";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
-import SearchPage from "../pages/SearchPage";
+import AllBookPage from "../pages/AllBookPage";
 import BookDetailPage from "../pages/BookDetailPage";
 import NotFound from "../pages/NotFound";
-import AddEditBookDetailPage from "../pages/AddEditBookDetailPage";
+import EditBookPage from "../pages/EditBookPage";
 import CartPage from "../pages/CartPage";
 import EditProfile from "../pages/EditProfile";
-import DashboardTablePage from "../pages/DashboardTablePage";
-import TransactionDetailPage from "../pages/TransactionDetailPage";
+import DashboardTableBookPage from "../pages/DashboardTableBookPage";
+import HistoryDetailPage from "../pages/HistoryDetailPage";
 import AddressPage from "../pages/AddressPage";
 import PaymentPage from "../pages/PaymentPage";
 import WrapperNoFooter from "../layouts/WrapperNoFooter";
 import ProtectRouteForAdmin from "./ProtectRouteForAdmin";
 import { DashboardContextProvider } from "../contexts/DashboardContext";
-import AddEditCategoryPage from "../pages/AddEditCategoryPage";
-import AddEditTransactionPage from "../pages/AddEditTransactionPage";
+import AddCategoryPage from "../pages/AddCategoryPage";
+import EditCategoryPage from "../pages/EditCategoryPage";
 import RouteForUserLogin from "./RouteForUserLogin";
 import ProtectPageWhenLogin from "./ProtectPageWhenLogin";
 import RedirectWhenAdminLogin from "./RedirectWhenAdminLogin";
+import HistoryPage from "../pages/HistoryPage";
+import AddBookDetailPage from '../pages/AddBookPage'
+import DashboardTableCategoryPage from '../pages/DashboardTableCategoryPage'
+import EditTransactionPage from '../pages/EditTransactionPage'
+import DashboardTableTransactionPage from '../pages/DashboardTableTransactionPage'
+import SearchPage from "../pages/SearchPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +59,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/books",
+        element: <AllBookPage />,
+      },
+      {
+        path: "/search",
         element: <SearchPage />,
       },
       {
@@ -83,7 +93,7 @@ const router = createBrowserRouter([
         path: "/profile/history",
         element: (
           <RouteForUserLogin>
-            <DashboardTablePage />
+            <HistoryPage />
           </RouteForUserLogin>
         ),
       },
@@ -91,7 +101,7 @@ const router = createBrowserRouter([
         path: "/profile/history/:transactionId",
         element: (
           <RouteForUserLogin>
-            <TransactionDetailPage />
+            <HistoryDetailPage />
           </RouteForUserLogin>
         ),
       },
@@ -125,39 +135,35 @@ const router = createBrowserRouter([
     children: [
       {
         path: "books",
-        element: <DashboardTablePage></DashboardTablePage>,
+        element: <DashboardTableBookPage></DashboardTableBookPage>,
       },
       {
         path: "books/add",
-        element: <AddEditBookDetailPage />,
+        element: <AddBookDetailPage />,
       },
       {
         path: "books/:bookId",
-        element: <AddEditBookDetailPage />,
+        element: <EditBookPage />,
       },
       {
         path: "category",
-        element: <DashboardTablePage />,
+        element: <DashboardTableCategoryPage />,
       },
       {
         path: "category/add",
-        element: <AddEditCategoryPage />,
+        element: <AddCategoryPage />,
       },
       {
         path: "category/:categoryId",
-        element: <AddEditCategoryPage />,
+        element: <EditCategoryPage />,
       },
       {
         path: "transactions",
-        element: <DashboardTablePage />,
-      },
-      {
-        path: "transactions/add",
-        element: <AddEditTransactionPage />,
+        element: <DashboardTableTransactionPage />,
       },
       {
         path: "transactions/:transactionId",
-        element: <AddEditTransactionPage />,
+        element: <EditTransactionPage />,
       },
     ],
   },

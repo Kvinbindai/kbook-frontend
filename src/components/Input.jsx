@@ -30,7 +30,7 @@ const Input = (props) => {
         onChange={onChange}
         type={type}
         placeholder={placeholder}
-        className={`input input-bordered w-${width} text-white ${extendedClass}`}
+        className={`input input-bordered w-${width} text-primary ${extendedClass}`}
         disabled={disabled}
         style={style}
       />

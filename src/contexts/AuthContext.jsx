@@ -8,32 +8,19 @@ const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
   const [authUser, setAuthUser] = useState(null);
-
+  const [refresh,setRefresh] = useState(false)
   const fetchUser = async () => {
     try {
       const res = await getMe();
       console.log(res);
       setAuthUser(res.data.user);
-      // for (let i = 0; i < authUser.allItem.length; i++) {
-      //   if (authUser.allItem[i].amount > 0) {
-      //     setTotalAmount((prev) => {
-      //       return prev + authUser.allItem[i].amount;
-      //     });
-      //     setTotalPrice((prev) => {
-      //       return prev + authUser.allItem[i].price * authUser.allItem[i].amount;
-      //     });
-      //   }
-      // }
     } catch (err) {
       console.log(err);
     }
   };
-  
 
   useEffect(() => {
     fetchUser();
-    // setAllState();
-   
   }, []);
 
   const loginUser = async (body) => {
@@ -56,15 +43,63 @@ export default function AuthContextProvider({ children }) {
 
   const updateUser = async (user) => {
     const res = await editUser(user);
-    console.log(res.data)
+    console.log(res.data);
     setAuthUser({
       ...res.data.updateUser,
     });
     // fetchUser()
   };
 
+  const updateAddressWhenSuccess = async (data) => {
+    // { data
+    //   contactName: "pie123456";
+    //   contactNumber: "0873542719";
+    //   createdAt: "2024-02-20T12:40:06.000Z";
+    //   district: "เขตพระนคร";
+    //   id: 1;
+    //   postCode: "10200";
+    //   province: "กรุงเทพมหานคร";
+    //   subDistrict: "พระบรมมหาราชวัง";
+    //   updatedAt: "2024-02-21T03:43:33.000Z";
+    //   userId: 9;
+    // }
+    setAuthUser((prev)=>({
+      ...authUser,
+      contact : {
+        ...data
+      }
+    }))
+  };
+
+  const updateBasketWhenSuccess = async (data) => {
+    let newTotalPrice = 0;
+    let newTotalAmount = 0;
+    for (let i = 0; i < data.length; i++) {
+      data[i]["price"] = data[i]["book"]["price"][0]["price"];
+      newTotalAmount += data[i]["amount"];
+      newTotalPrice += data[i]["amount"] * data[i]["book"]["price"][0]["price"];
+    }
+    setAuthUser((prev) => ({
+      ...authUser,
+      allItem: data,
+      totalAmount: newTotalAmount,
+      totalPrice: newTotalPrice,
+    }));
+  };
+
+  const updateNewBasketToAuthUser = async (data) => {
+    setAuthUser((prev)=>({
+      ...authUser,
+      basketId : data.newBasketId,
+      allItem : data.allItem,
+      totalAmount : 0,
+      totalPrice : 0
+    }))
+  } 
+
   
-  
+
+
 
   return (
     <AuthContext.Provider
@@ -75,6 +110,11 @@ export default function AuthContextProvider({ children }) {
         logout,
         updateUser,
         fetchUser,
+        updateBasketWhenSuccess,
+        updateAddressWhenSuccess,
+        updateNewBasketToAuthUser,
+        setRefresh,
+        refresh
       }}
     >
       {children}

@@ -8,7 +8,7 @@ const EditAddressPage = () => {
     e.preventDefault();
   };
   return (
-    <div className="bg-white min-h-screen p-8">
+    <div className=" min-h-screen p-8">
       <div className="text-xl flex justify-between items-center">
         <h1>เพิ่มที่อยู่เพื่อจัดส่ง</h1>
         <div className="flex gap-5">
@@ -17,7 +17,7 @@ const EditAddressPage = () => {
               <input
                 type="radio"
                 name="radio-10"
-                className="radio checked:bg-red-500"
+                className="radio checked:bg-primary-500"
                 checked
               />
               <span className="label-text text-xl">รับที่ร้าน</span>
@@ -28,7 +28,7 @@ const EditAddressPage = () => {
               <input
                 type="radio"
                 name="radio-10"
-                className="radio checked:bg-red-500"
+                className="radio checked:bg-primary-500"
               />
               <span className="label-text text-xl">จัดส่งถึงบ้าน</span>
             </label>

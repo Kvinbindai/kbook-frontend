@@ -1,7 +1,14 @@
 import axios from "../config/axios";
 
-const getAllList =  (path) => {
-    return axios.get(`/${path}`)
+const getAllBookList =  () => {
+    return axios.get('/books')
+}
+const getAllCategoryList =  () => {
+    return axios.get('/category')
+}
+const getAllTransactionList =  () => {
+    return axios.get('/transactions')
 }
 
-export { getAllList}
+
+export { getAllBookList , getAllCategoryList , getAllTransactionList}

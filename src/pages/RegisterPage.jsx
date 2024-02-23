@@ -1,4 +1,4 @@
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import Title from "../components/Title";
@@ -9,8 +9,8 @@ import { registerSchema } from "../validators/user-validator";
 import validateInput from "../utils/validate";
 import useAuth from "../hooks/use-auth";
 const RegisterPage = () => {
-  const navigate = useNavigate()
-  const { registerUser , authUser } = useAuth()
+  const navigate = useNavigate();
+  const { registerUser, authUser } = useAuth();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -37,10 +37,10 @@ const RegisterPage = () => {
   const submitForm = async (e) => {
     try {
       e.preventDefault();
-      const {value , errorObj } = validateInput(registerSchema,user)
-      setError(errorObj)
-      await registerUser(value)
-      navigate('/')
+      const { value, errorObj } = validateInput(registerSchema, user);
+      setError(errorObj);
+      await registerUser(value);
+      navigate("/");
       toast.success("Register Success");
     } catch (err) {
       console.log(err);
@@ -48,7 +48,8 @@ const RegisterPage = () => {
     }
   };
   return (
-    <div className="min-h-screen pt-5 bg-gray-500">
+    <div className="min-h-screen pt-5 bg-gray-500 flex flex-col justify-center items-center">
+      <div>
       <Title className="text-center font-bold">REGISTER FORM</Title>
       <form onSubmit={submitForm}>
         <div className="w-full flex flex-col items-center mt-20 gap-10">
@@ -117,12 +118,13 @@ const RegisterPage = () => {
           </Input>
           <Button className="w-96 mt-8">REGISTER</Button>
         </div>
+        <div className="mt-12 text-2xl text-center pb-8">
+          <span>ALREADY HAVE AN ACCOUNT ?</span>
+          <Link to="/login">
+            <span className="text-blue-500 underline mx-6 ">SIGN IN</span>
+          </Link>
+        </div>
       </form>
-      <div className="mt-12 text-2xl text-center pb-8">
-        <span>ALREADY HAVE AN ACCOUNT ?</span>
-        <Link to="/login">
-          <span className="text-blue-500 underline mx-6 ">SIGN IN</span>
-        </Link>
       </div>
     </div>
   );

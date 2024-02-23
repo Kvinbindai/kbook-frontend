@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="footer p-10 bg-base-200 text-base-content justify-center grid-cols-4">
+    <footer className="footer p-10 bg-primary text-secondary justify-center grid-cols-4">
       <nav>
         <h1 className="footer-title text-2xl">ABOUT US</h1>
         <a className="link link-hover">Branding</a>
@@ -33,7 +33,7 @@ const Footer = () => {
               placeholder="example@site.com"
               className="input input-bordered join-item"
             />
-            <button className="btn btn-primary join-item">+</button>
+            <button className="btn btn-primary join-item border-gray-950">+</button>
           </div>
         </fieldset>
       </div>

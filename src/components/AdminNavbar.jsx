@@ -9,7 +9,7 @@ const AdminNavbar = () => {
  
 
   return (
-    <div className="flex fixed right-0 left-0 p-3 bg-white  px-5 justify-between items-center z-50 border-b-2 border-black min-h-[72px]">
+    <div className="flex fixed right-0 left-0 p-3 bg-secondary  px-5 justify-between items-center z-50 border-b-2 border-black min-h-[72px]">
       <div className="text-4xl font-bold  text-black">
         <Logo />
       </div>

@@ -34,10 +34,15 @@ const BookDetailPage = () => {
   const addToCart = async (e) => {
     try{
       e.preventDefault()
+      if(currentAmount > bookData?.amount){
+        toast.error('Cant Add more than Stock')
+        return
+      }
       const data = { basketId : authUser.basketId , bookId : bookData.id , amount : currentAmount }
      await addBasketItemToCart(data)
      toast.success('Add to Cart Success')
      navigate('/books')
+     window.location.reload();
     }catch(err){
       console.log(err)
       toast.error('Failed To Add In Cart')
@@ -49,17 +54,17 @@ const BookDetailPage = () => {
     getData();
   }, []);
   return (
-    <div className="py-12 px-24 flex flex-col gap-7 w-full bg-white text-black">
+    <div className="py-12 px-24 flex flex-col gap-7 w-full">
       <div className="flex justify-between items-center ">
         <div className="text-xl flex gap-10 items-center">
           <span>BOOK LEFT :</span>
-          <span className="p-2 bg-gray-500 text-white rounded-lg w-10 h-10 flex justify-center items-center">
+          <span className="p-2 bg-primary-500 text-primary rounded-lg w-10 h-10 flex justify-center items-center">
             {bookData?.amount}
           </span>
         </div>
         <div className="flex justify-between gap-10 mr-24">
           <Button onClick={addToCart} >ADD TO CART</Button>
-          <Button onClick={()=>navigate('/book')}>BACK</Button>
+          <Button onClick={()=>navigate('/')}>BACK</Button>
         </div>
       </div>
       <div className="flex justify-between ">
@@ -90,11 +95,11 @@ const BookDetailPage = () => {
           <div className="text-xl grid grid-cols-3 gap-10">
             <div>
               <div>Amount :</div>
-              <div className="flex justify-between text-center items-center bg-gray-500 rounded-lg mt-5">
+              <div className="flex justify-between text-center items-center bg-primary-500 rounded-lg mt-5">
                 <span className="material-symbols-outlined active:scale-110 cursor-pointer"  onClick={decreaseCount}>
                   do_not_disturb_on
                 </span>
-                <span className="text-white" >{currentAmount}</span>
+                <span className="text-primaryryry" >{currentAmount}</span>
                 <span className="material-symbols-outlined active:scale-110 cursor-pointer" onClick={addCount}>add_circle</span>
               </div>
             </div>

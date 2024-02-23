@@ -10,7 +10,8 @@ import { addOrUpdateAddress } from "../api/address";
 
 const AddressPage = () => {
   const navigate = useNavigate();
-  const { authUser } = useAuth();
+  const { authUser, updateAddressWhenSuccess } = useAuth();
+
   const [delivery, setDelivery] = useState("self");
   const [provincesList, setProvincesList] = useState([]);
   const [districtList, setDistrictList] = useState([]);
@@ -20,7 +21,7 @@ const AddressPage = () => {
     district: "",
     subDistrict: "",
     postCode: "",
-    contactName: authUser?.firstName,
+    contactName:  authUser?.firstName,
     contactNumber: authUser?.phoneNumber,
   });
 
@@ -39,15 +40,15 @@ const AddressPage = () => {
   };
 
   const handleProvinceOnChange = (e) => {
-    setContact({
-      ...contact,
+    setContact((prev) => ({
+      ...prev,
       province: e.target.value,
-    });
+    }));
     const currentProvince = e.target.value;
     const filterDistrict = provincesList?.filter(
       (province) => province["name_th"] == currentProvince
     );
-    console.log(filterDistrict[0]);
+    // console.log(filterDistrict[0]);
     setDistrictList(filterDistrict[0]["amphure"]);
   };
   const handleDistrictOnChange = (e) => {
@@ -64,18 +65,22 @@ const AddressPage = () => {
   };
 
   const handleSubDistrictOnChange = (e) => {
-    const currentSubDistrict = subDistrictList.find(
-      (sub) => sub["name_th"] === e.target.value
-    );
+    const currentSubDistrict = subDistrictList.find((sub) => {
+      if (contact.subDistrict) {
+        return sub["name_th"] === contact.subDistrict;
+      } else {
+        return sub["name_th"] === e.target.value;
+      }
+    });
     console.log(currentSubDistrict["name_th"]);
-  
-    setContact(prev=>({
+
+    setContact((prev) => ({
       ...prev,
       subDistrict: currentSubDistrict["name_th"],
     }));
     // console.log(newObj)
     const code = currentSubDistrict["zip_code"];
-    setContact(prev=>({
+    setContact((prev) => ({
       ...prev,
       postCode: String(code),
     }));
@@ -95,26 +100,32 @@ const AddressPage = () => {
       )
         .then((response) => response.json())
         .then((result) => {
-          setProvincesList(result);
+          setProvincesList(() => result);
         });
     })();
-  }, [contact.province]);
+  }, []);
 
   const submitData = async (e) => {
     try {
       e.preventDefault();
       if (delivery === "delivery") {
-        await addOrUpdateAddress(contact);
+        const result = await addOrUpdateAddress(contact);
+        // console.log(result.data.data) // obj
+        await updateAddressWhenSuccess(result.data.data);
+        toast.success("Save Address Complete");
+        navigate("/cart/address/payment");
+      } else {
+        // await addOrUpdateAddress();
+        navigate("/cart/address/payment");
       }
-      toast.success("Save Address Complete");
-      navigate("/cart/address/payment");
     } catch (err) {
       console.log(err);
       navigate("/cart");
+      window.location.reload();
     }
   };
   return (
-    <div className="bg-white min-h-screen p-8">
+    <div className=" min-h-screen p-8">
       <div className="text-xl flex justify-between items-center">
         <h1>เพิ่มที่อยู่เพื่อจัดส่ง</h1>
         <div className="flex gap-5">
@@ -123,7 +134,7 @@ const AddressPage = () => {
               <input
                 type="radio"
                 name="radio-10"
-                className="radio checked:bg-red-500"
+                className="radio checked:bg-primary"
                 value="self"
                 onChange={(e) => handleRadio(e.target.value)}
                 checked={delivery === "self"}
@@ -137,7 +148,7 @@ const AddressPage = () => {
                 type="radio"
                 name="radio-10"
                 value="delivery"
-                className="radio checked:bg-red-500"
+                className="radio checked:bg-primary"
                 onChange={(e) => handleRadio(e.target.value)}
                 checked={delivery === "delivery"}
               />
@@ -188,7 +199,7 @@ const AddressPage = () => {
           <Input
             placeholder="Enter Contact Name...."
             disabled={delivery === "self" ? true : false}
-            value={contact.contactName}
+            value={contact?.contactName || authUser?.firstName}
             onChange={handleContactChange}
             name="contactName"
           >
@@ -197,7 +208,7 @@ const AddressPage = () => {
           <Input
             placeholder="Enter Contact Number...."
             disabled={delivery === "self" ? true : false}
-            value={contact.contactNumber}
+            value={contact?.contactNumber || authUser?.phoneNumber}
             onChange={handleContactChange}
             name="contactNumber"
           >
@@ -207,7 +218,7 @@ const AddressPage = () => {
             <Button className="w-40 bg-green-500 hover:bg-green-600">
               Confirm
             </Button>
-            <Button className="w-40 bg-gray-500" onClick={() => navigate(-1)}>
+            <Button className="w-40 bg-primary-500" onClick={() => navigate(-1)}>
               Back
             </Button>
           </div>
