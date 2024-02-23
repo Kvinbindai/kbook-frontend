@@ -50,7 +50,7 @@ const RegisterPage = () => {
   return (
     <div className="min-h-screen pt-5 bg-gray-500 flex flex-col justify-center items-center">
       <div>
-      <Title className="text-center font-bold">REGISTER FORM</Title>
+      <Title className="text-center font-bold bg-transparent">REGISTER FORM</Title>
       <form onSubmit={submitForm}>
         <div className="w-full flex flex-col items-center mt-20 gap-10">
           <Input

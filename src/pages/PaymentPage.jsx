@@ -55,7 +55,7 @@ const PaymentPage = () => {
       {loading && <Loading />}
       <div className="min-h-screen flex flex-col justify-center items-center"> 
         <div >
-          <h1 className="text-3xl mb-8 text-center text-black">Checkout Bill</h1>
+          <h1 className="text-3xl mb-8 text-center text-secondary">Checkout Bill</h1>
           <div className="w-96">
             {slip ? (
               <div className="relative bg-gray-200">

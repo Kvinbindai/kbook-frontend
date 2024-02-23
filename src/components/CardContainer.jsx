@@ -14,7 +14,7 @@ const CardContainer = (props) => {
   },[refresh])
 
   return (
-    <div className="grid grid-cols-4 p-5 gap-10">
+    <div className="grid grid-cols-4 p-5 gap-8">
      {
       bookData ? (
         limit ? (

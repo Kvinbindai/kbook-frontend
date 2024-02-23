@@ -6,7 +6,7 @@ const Wrapper = () => {
   return (
     <>
       <Navbar />
-      <div className="pt-[72px]">
+      <div className="pt-[72px] w-[1024px] mx-auto">
         <Outlet />
       </div>
       <Footer />

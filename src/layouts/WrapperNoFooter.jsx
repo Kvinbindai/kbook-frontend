@@ -6,9 +6,9 @@ const WrapperNoFooter = () => {
   return (
     <>
       <AdminNavbar />
-      <div className="pt-[72px]">
+     <div className="pt-[72px] w-[1024px] mx-auto">
         <Outlet />
-      </div>
+     </div>
     </>
   );
 };
