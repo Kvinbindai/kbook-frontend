@@ -6,10 +6,10 @@ const CardList = (props) => {
   const { data } = props
   return (
     <Link to={`/book/${data.id}`}>
-      <div className="card w-60 h-96 bg-primary shadow-xl p-4 hover:scale-110">
+      <div className="card w-58 h-80 bg-primary shadow-xl p-4 hover:scale-110">
         <figure>
           <img
-            className="h-80 w-80"
+            className="h-80"
             src={data.bookImage || "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"}
             alt="Shoes"
           />

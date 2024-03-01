@@ -54,11 +54,11 @@ const BookDetailPage = () => {
     getData();
   }, []);
   return (
-    <div className="py-12 px-24 flex flex-col gap-7 w-full">
+    <div className="py-12 px-24 flex flex-col gap-7 w-full bg-secondary">
       <div className="flex justify-between items-center ">
         <div className="text-xl flex gap-10 items-center">
           <span>BOOK LEFT :</span>
-          <span className="p-2 bg-primary-500 text-primary rounded-lg w-10 h-10 flex justify-center items-center">
+          <span className="p-2 bg-primary-500 text-black rounded-lg w-16 h-10 flex justify-center items-center bg-primary">
             {bookData?.amount}
           </span>
         </div>
@@ -80,22 +80,22 @@ const BookDetailPage = () => {
         <div className="flex flex-col gap-5">
           <div className="text-xl flex flex-col gap-5">
             <div>Book Title (EN) :</div>
-            <div className="px-5">{bookData?.enTitle || "-"}</div>
+            <div className="px-5 bg-primary rounded-lg py-2">{bookData?.enTitle || "-"}</div>
           </div>
           <div className="text-xl flex flex-col gap-5">
             <div>Book Title (TH) :</div>
-            <div className="px-5">{bookData?.thTitle || "-"}</div>
+            <div className="px-5 bg-primary rounded-lg py-2">{bookData?.thTitle || "-"}</div>
           </div>
           <div className="text-xl flex flex-col gap-5">
             <div>Category :</div>
-            <div className="px-5">
+            <div className="px-5 bg-primary rounded-lg py-2">
               {bookData?.categoryEn || bookData?.categoryTh}
             </div>
           </div>
-          <div className="text-xl grid grid-cols-3 gap-10">
-            <div>
+          <div className="text-xl grid grid-cols-3 gap-10 ">
+            <div >
               <div>Amount :</div>
-              <div className="flex justify-between text-center items-center bg-primary-500 rounded-lg mt-5">
+              <div className="flex justify-between text-center items-center bg-primary rounded-lg mt-5">
                 <span className="material-symbols-outlined active:scale-110 cursor-pointer"  onClick={decreaseCount}>
                   do_not_disturb_on
                 </span>
@@ -105,7 +105,7 @@ const BookDetailPage = () => {
             </div>
             <div>
               <div>Price :</div>
-              <div className="text-center  rounded-lg mt-5">
+              <div className="text-center bg-primary  rounded-lg mt-5">
                 {bookData?.price}
               </div>
             </div>
@@ -118,11 +118,11 @@ const BookDetailPage = () => {
       <div className="text-xl flex flex-col gap-5 ">
         <div className="flex flex-col gap-5">
           <div>Description (EN) :</div>
-          <div className="px-5">{bookData?.enDescription || "-"}</div>
+          <div className="px-5 bg-primary rounded-lg py-2">{bookData?.enDescription || "-"}</div>
         </div>
         <div className="flex flex-col gap-5">
           <div>Description (TH) :</div>
-          <div className="px-5">{bookData?.thDescription || "-"}</div>
+          <div className="px-5 bg-primary rounded-lg py-2">{bookData?.thDescription || "-"}</div>
         </div>
       </div>
     </div>

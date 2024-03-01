@@ -71,7 +71,7 @@ const CartPage = () => {
   };
 
   return (
-    <div className="w-full min-h-[700px] p-10 relative">
+    <div className="w-full min-h-[700px] p-10 relative bg-secondary">
       {total ? (
         <>
           <div className="flex flex-col gap-5 pb-60">

@@ -12,7 +12,7 @@ const BookContainer = (props) => {
 
 
   return (
-    <div className="w-full py-16">
+    <div className="w-full py-16 px-4 bg-secondary">
       <h1 className="text-xl underline" onClick={()=>navigate('/')} >{title}</h1> 
       <div className="py-5">
         {limit ? <CardContainer limit={limit}/> : <CardContainer/>}

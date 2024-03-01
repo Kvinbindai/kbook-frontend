@@ -125,7 +125,7 @@ const AddressPage = () => {
     }
   };
   return (
-    <div className=" min-h-screen p-8">
+    <div className=" min-h-screen p-8 bg-primary">
       <div className="text-xl flex justify-between items-center">
         <h1>เพิ่มที่อยู่เพื่อจัดส่ง</h1>
         <div className="flex gap-5">
@@ -215,7 +215,7 @@ const AddressPage = () => {
             Contact Number :
           </Input>
           <div className="flex justify-between mt-5">
-            <Button className="w-40 bg-green-500 hover:bg-green-600">
+            <Button className="w-40 bg-green-500" disabled={(delivery !== 'self' && contact.province && contact.district && contact.subDistrict) ? false : delivery === 'self' ? false : true }>
               Confirm
             </Button>
             <Button className="w-40 bg-primary-500" onClick={() => navigate(-1)}>

@@ -69,6 +69,7 @@ const EditTransactionPage = () => {
                   <h1 className="mx-5">{details.totalPrice}</h1>
                 </div>
                 <div className="flex flex-col gap-5">
+                <h1>Status :</h1>
                   <select
                     // disabled={true}
                     className="select select-bordered text-primary  w-96"

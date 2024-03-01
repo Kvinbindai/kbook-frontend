@@ -22,16 +22,16 @@ const CartComponent = (props) => {
   return (
     <>
       {amount > 0 ? (
-        <div className="flex justify-between gap-5 min-h-60 p-5 border-blue-500">
+        <div className="flex justify-between gap-5 min-h-60 p-5 bg-primary rounded-lg">
           {data?.bookImage ? (
-            <img className="w-96" src={data?.bookImage} />
+            <img className="w-60" src={data?.bookImage} />
           ) : (
             <div className="bg-primary min-w-60 flex justify-center items-center">
               NO Photo
             </div>
           )}
-          <div className="flex flex-col  gap-6">
-            <h1 className="text-xl">
+          <div className="flex flex-col  gap-8">
+            <h1 className="text-xl min-h-10">
               {data?.enTitle ? data?.enTitle : data?.thTitle}
             </h1>
             <div className="flex gap-5 min-w-96">
